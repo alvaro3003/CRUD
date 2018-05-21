@@ -75,11 +75,11 @@ public class Departamentos {
         return dep;
     }
 
-    public void Delete(int dep_no, Departamento dep) throws SQLException {
+    public void Delete(Departamento dep,int dept_no) throws SQLException {
 
         String sql = "Delete from Departamentos WHERE dept_no= ?";
         PreparedStatement sentencia = conexion.prepareStatement(sql);
-        sentencia.setInt(1, dep.getDept_no());
+        sentencia.setInt(1 , dept_no);
         sentencia.executeUpdate();
 
     }

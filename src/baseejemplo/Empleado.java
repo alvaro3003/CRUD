@@ -38,6 +38,7 @@ public class Empleado {
         this.apellido = apellido;
         this.oficio = oficio;
         this.dir = dir;
+        //Introduzco la fecha con la clase DateFormat desde una String en el main
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             this.fecha_Alt = format.parse(fecha_Alt);
@@ -80,7 +81,7 @@ public class Empleado {
     public void setDir(int dir) {
         this.dir = dir;
     }
-
+    //Se utiliza por defecto pero se implementado getfechasql por temas compatibilidad
     public java.util.Date getFecha_Alt() {
         return fecha_Alt;
     }

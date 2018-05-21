@@ -26,23 +26,38 @@ public class BaseEjemplo {
      */
     
     public static void main(String[] args) {
-
+//Creamos 2 obejtos para usar los metodos CRUDS
         Departamentos deps=new Departamentos();
         Empleados emps=new Empleados();
         
     
         
-       
+       //Creamos un swtich para los 8 casos
         try {
             Scanner sc = new Scanner(System.in);
             System.out.println("Elige una de los 8 casos");
+            
+            System.out.println("1º Listar el numero del departamento");
+             System.out.println("2º Listar el numero del empleado");
+
+             System.out.println("3º Buscar empleado por apellido");
+
+            System.out.println("4º Buscar departamento por nombre");
+
+                System.out.println("5º Crear Empleado");
+
+                System.out.println("6º Crear Departamento");
+
+              System.out.println("7º Borrar Empleado");
+
+            System.out.println("8º Borrar departamento");
+
             int opcion;
             opcion = sc.nextInt();
             
             switch(opcion){
                 case 1:
                     //Listar departamentos
-                  //  dep = deps.Read(10, dep);
                     System.out.println("Introduce el numero del departamento");
                    int dept_no= sc.nextInt();
                    Departamento dep= null;
@@ -87,8 +102,7 @@ public class BaseEjemplo {
                     
                 case 5:
                     //Crear empleado
-                    emp=null;
-                    System.out.println("Introduce el apellido");    String apellido1=sc.next();
+                    System.out.println("Introduce el apellido");     apellido=sc.next();
                    
               System.out.println("Introduce el numero de empleado");   int Emp_no=sc.nextInt();
                System.out.println("Introduce el oficio");  String oficio=sc.next();
@@ -97,8 +111,8 @@ public class BaseEjemplo {
                System.out.println("Introduce el salario");  float salario=sc.nextFloat();
               System.out.println("Introduce la comision");   float comision=sc.nextFloat();
                System.out.println("Introduce el numero de departamento");  dept_no=sc.nextInt();
-                    ;
-                    emps.Create(emp);
+               emp=new Empleado(Emp_no, apellido, oficio, dir, fecha, salario, comision, dept_no);
+               emps.Create(emp);
                     break;
                     
                 case 6:
@@ -106,22 +120,43 @@ public class BaseEjemplo {
                   
                     System.out.println("Introduce el departamento numero");
                     dept_no=sc.nextInt();
-                    System.out.println("Introduce el departamento numero");
-                    String dnombree=sc.next();
-                    System.out.println("Introduce el departamento numero"); String loc=sc.next();
+                    System.out.println("Introduceel nombre departamento");
+                     dnombre=sc.next();
+                    System.out.println("Introduce la localizacion del departamento"); 
+                    String loc=sc.next();
                     
-                    dep=new Departamento(dept_no, dnombree, loc);
+                    dep=new Departamento(dept_no, dnombre, loc);
                     deps.Create(dep);
                     break;
                     
                 case 7:
                     //Borrar empleado
-                    
+                      System.out.println("Introduce el apellido");     apellido=sc.next();
+              System.out.println("Introduce el numero de empleado");    Emp_no=sc.nextInt();
+               System.out.println("Introduce el oficio");   oficio=sc.next();
+                System.out.println("Introduce el dir");  dir=sc.nextInt();
+                System.out.println("Introduce la fecha, debe seguirn el siguiente Formato: ej. '1990-02-20' ");  fecha=sc.next();
+               System.out.println("Introduce el salario");   salario=sc.nextFloat();
+              System.out.println("Introduce la comision");    comision=sc.nextFloat();
+               System.out.println("Introduce el numero de departamento");  dept_no=sc.nextInt();
+               emp=new Empleado(Emp_no, apellido, oficio, dir, fecha, salario, comision, dept_no);
+                    emps.Delete(Emp_no, emp); 
                     break;
+                    
+                    
+                    
                     
                 case 8:
                     //Borrar departamento
-                  
+                   System.out.println("Introduce el departamento numero");
+                    dept_no=sc.nextInt();
+                    System.out.println("Introduce el nombre departamento");
+                     dnombre=sc.next();
+                    System.out.println("Introduce el departamento numero"); 
+                     loc=sc.next();
+                    
+                    dep=new Departamento(dept_no, dnombre, loc);
+                    deps.Delete(dep, dept_no);
                     break;
                        
                 
@@ -129,12 +164,7 @@ public class BaseEjemplo {
             
             
            
-       //     emps.Create(emp);
-         //   emp.setApellido("caarl");
-           // emps.Update(69,emp);
-            //emps.Read(69, emp);
-            //emps.Delete(69,emp);
-            
+      
         } catch (SQLException ex) {
             Logger.getLogger(BaseEjemplo.class.getName()).log(Level.SEVERE, null, ex);
         }

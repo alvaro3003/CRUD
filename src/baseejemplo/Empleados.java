@@ -64,10 +64,11 @@ public class Empleados {
       public void Delete(int emp_no, Empleado emp) throws SQLException {
         
       
-        String sql = "Delete from Empleados WHERE emp_no= 9";
-        Statement sentencia = conexion.createStatement();
-       
-      sentencia.execute(sql);
+        String sql = "Delete from empleados WHERE emp_no= ?";
+        PreparedStatement sentencia = conexion.prepareStatement(sql);
+       sentencia.setInt(1, emp_no);
+        
+      sentencia.executeUpdate();
       
     }
       
