@@ -28,7 +28,7 @@ public class Departamentos {
     public Departamentos() {
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/ejemplo", "ejemplo", "ejemplo");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplo?zeroDateTimeBehavior=convertToNull", "ejemplo", "ejemplo");
         } catch (SQLException ex) {
             Logger.getLogger(Departamentos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,15 +83,15 @@ public class Departamentos {
         sentencia.executeUpdate();
 
     }
- public Departamento ReadNombre(String apellidos) throws SQLException {
+ public Departamento ReadNombre(String dnombre) throws SQLException {
 
-        String sql = "select * from departamentos where apellidos = ?";
+        String sql = "select * from departamentos where dnombre = ?";
         PreparedStatement sentencia = conexion.prepareStatement(sql);
-        sentencia.setString(1, apellidos);
+        sentencia.setString(1, dnombre);
 
         sentencia.execute();
         ResultSet rs = sentencia.getResultSet();
-        Departamento dep = null;
+       Departamento dep=new Departamento();
         while (rs.next()) {
             dep = new Departamento(rs.getInt("dept_no"), rs.getString("dnombre"), rs.getNString("loc"));
         }

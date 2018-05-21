@@ -36,6 +36,8 @@ public class Departamento {
     
     public Departamento(){
         
+      
+        
     }
     
     public int getDept_no() {

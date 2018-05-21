@@ -25,7 +25,7 @@ public class Empleados {
    
     private Connection conexion;
     private ArrayList<Empleado> empleados;  
-Statement sentencia = null;    
+    PreparedStatement sentencia = null;    
     public Empleados() {
       try {
             conexion = DriverManager.getConnection("jdbc:mysql://localhost/ejemplo", "ejemplo", "ejemplo");
@@ -38,11 +38,11 @@ Statement sentencia = null;
         int filas;
         String sql = "INSERT INTO empleados VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
         PreparedStatement sentencia = conexion.prepareStatement(sql);
-        sentencia.setInt(1, emp.getDept_no());
+        sentencia.setInt(1, emp.getEmp_no());
         sentencia.setString(2, emp.getApellido());
         sentencia.setString(3, emp.getOficio());
         sentencia.setInt(4, emp.getDir());
-        sentencia.setDate(5, (Date) emp.getFecha_Alt());
+        sentencia.setDate(5, emp.getFechaSql());
         sentencia.setFloat(6, emp.getSalario());
         sentencia.setFloat(7, emp.getComision());
         sentencia.setInt(8, emp.getDept_no());
@@ -78,17 +78,33 @@ Statement sentencia = null;
        Empleado emp = null;
 
        String sql = "select * from empleados where emp_no = " + emp_no;
-       sentencia = conexion.createStatement();
+       sentencia = conexion.prepareStatement(sql);
        sentencia.execute(sql);
 
-       ResultSet rs = sentencia.getResultSet();
+        ResultSet rs = sentencia.getResultSet();
        while (rs.next()) {
-           emp = new Empleado(rs.getInt("emp_no"), rs.getString("Apellido"), rs.getString("oficio"), rs.getInt("dir"), rs.getDate("fecha_alt"), rs.getFloat("salario"), rs.getFloat("comision"), rs.getInt("dept_no"));
+           emp = new Empleado(rs.getInt("emp_no"), rs.getString("Apellido"), rs.getString("oficio"), rs.getInt("dir"), rs.getDate("fecha_alt").toString(), rs.getFloat("salario"), rs.getFloat("comision"), rs.getInt("dept_no"));
        }
        rs.close();
 
        sentencia.close();
        return emp;
+
+
+   }
+     public Empleado ReadNombre(String apellido) throws SQLException {
+
+       String sql = "select * from empleados where apellido = ?";
+        PreparedStatement sentencia = conexion.prepareStatement(sql);
+        sentencia.setString(1, apellido);
+
+        sentencia.execute();
+        ResultSet rs = sentencia.getResultSet();
+       Empleado emp=new Empleado();
+        while (rs.next()) {
+            emp = new Empleado(rs.getInt("emp_no"), rs.getString("Apellido"), rs.getString("oficio"), rs.getInt("dir"), rs.getDate("fecha_alt").toString(), rs.getFloat("salario"), rs.getFloat("comision"), rs.getInt("dept_no"));
+        }
+        return emp;
 
    }
 }

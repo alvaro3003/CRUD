@@ -58,10 +58,16 @@ public class BaseEjemplo {
                      emp = emps.ReadNum(emp_no);
                      System.out.printf(" %d, %s %n %s %d %s %f %f %d %n ",
                         emp.getEmp_no(), emp.getApellido(), emp.getOficio(),emp.getDir(),emp.getFecha_Alt(),emp.getSalario(),emp.getComision(),emp.getDept_no());
-                
+                break;
                 case 3:
                     //Buscar Empleado por nombre
-
+                    
+                    System.out.println("Introduce el apellido del empleado");
+                  String apellido= sc.next();
+                     emp = emps.ReadNombre(apellido);
+                     System.out.printf(" %d, %s %n %s %d %s %f %f %d %n ",
+                        emp.getEmp_no(), emp.getApellido(), emp.getOficio(),emp.getDir(),emp.getFecha_Alt(),emp.getSalario(),emp.getComision(),emp.getDept_no());
+                    
 
                     
                  break;
@@ -69,7 +75,11 @@ public class BaseEjemplo {
                 case 4:
                     
                     //Buscar departamento por nombre
-                    
+                      System.out.println("Introduce el nombre del departamento");
+                   String dnombre= sc.next();
+                     dep = deps.ReadNombre(dnombre);
+                     System.out.printf(
+                        dep.getDept_no()+ " " +dep.getDnombre()+ " " +dep.getLoc()+ "\n");
                     
                     
                     
@@ -78,26 +88,29 @@ public class BaseEjemplo {
                 case 5:
                     //Crear empleado
                     emp=null;
-                    System.out.println("Introduce el apellido");      String apellido=sc.next();
-              System.out.println("Introduce el numero de empresario");   int Emp_no=sc.nextInt();
+                    System.out.println("Introduce el apellido");    String apellido1=sc.next();
+                   
+              System.out.println("Introduce el numero de empleado");   int Emp_no=sc.nextInt();
                System.out.println("Introduce el oficio");  String oficio=sc.next();
                 System.out.println("Introduce el dir"); int dir=sc.nextInt();
-                System.out.println("Introduce la fecha"); String fecha=sc.next();
+                System.out.println("Introduce la fecha, debe seguirn el siguiente Formato: ej. '1990-02-20' "); String fecha=sc.next();
                System.out.println("Introduce el salario");  float salario=sc.nextFloat();
               System.out.println("Introduce la comision");   float comision=sc.nextFloat();
                System.out.println("Introduce el numero de departamento");  dept_no=sc.nextInt();
-                 //   emp=new Empleado(Emp_no, apellido, oficio, dir, fecha_Alt, salario, comision, dept_no);
+                    ;
                     emps.Create(emp);
                     break;
                     
                 case 6:
                     //Crear departamento
                   
-                    System.out.println("Introduce el departamento numero"); dept_no=sc.nextInt();
-                    System.out.println("Introduce el departamento numero"); String dnombre=sc.next();
+                    System.out.println("Introduce el departamento numero");
+                    dept_no=sc.nextInt();
+                    System.out.println("Introduce el departamento numero");
+                    String dnombree=sc.next();
                     System.out.println("Introduce el departamento numero"); String loc=sc.next();
                     
-                    dep=new Departamento(dept_no, dnombre, loc);
+                    dep=new Departamento(dept_no, dnombree, loc);
                     deps.Create(dep);
                     break;
                     
